@@ -28,12 +28,14 @@ end
      render json: { error: t.errors.full_messages }
     end
   else
-   render json: { error: "Tenant not found" }, status: :not_found
+   render json: { error: ["Tenant not found"] }, status: :not_found
   end
  end
 
  def destroy
-  
+  tenant = Tenant.find_by(id: params[:id])
+  tenant.destroy
+  head :no_content
  end
 
  private
